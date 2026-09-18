@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-panel: var(--panel);
+}
+
+:root {
+  color-scheme: light;
+  --background: #f7f4ee;
+  --foreground: #20231f;
+  --card: #fffdf8;
+  --card-foreground: #20231f;
+  --panel: #eee9df;
+  --muted: #e9e2d8;
+  --muted-foreground: #625f58;
+  --accent: #0f766e;
+  --accent-foreground: #f8fffd;
+  --border: #d8d0c4;
+  --ring: #0f766e;
+  --nav-bg: rgba(247, 244, 238, 0.78);
+  --shadow-soft: 0 24px 80px rgba(32, 35, 31, 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #101214;
+  --foreground: #f1eee7;
+  --card: #171a1d;
+  --card-foreground: #f1eee7;
+  --panel: #1f2428;
+  --muted: #24292d;
+  --muted-foreground: #aaa59b;
+  --accent: #5eead4;
+  --accent-foreground: #062522;
+  --border: #33383d;
+  --ring: #5eead4;
+  --nav-bg: rgba(16, 18, 20, 0.78);
+  --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 12%, transparent), transparent 30rem),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.7rem 1rem;
+  color: var(--foreground);
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.container-px {
+  padding-left: clamp(1rem, 4vw, 3rem);
+  padding-right: clamp(1rem, 4vw, 3rem);
+}
+
+.hairline {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--border) 90%, transparent),
+    transparent
+  );
+  height: 1px;
+}
+
+.focus-card {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 86%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.grid-mask {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--border) 42%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--border) 42%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, black, transparent 80%);
+}
+
+.prose-content {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.prose-content p + p,
+.prose-content p + ul,
+.prose-content ul + p,
+.prose-content ul + ul {
+  margin-top: 1rem;
+}
+
+.prose-content ul {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+}
+
+.prose-content li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.prose-content li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  height: 0.35rem;
+  width: 0.35rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
